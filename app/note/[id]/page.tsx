@@ -8,7 +8,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const note = await getNote(noteId);
 
   // 为了让 Suspense 的效果更明显
-  await sleep(2000);
+  await sleep(1000);
 
   if (note == null) {
     return (
