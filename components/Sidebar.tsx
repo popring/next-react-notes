@@ -4,6 +4,7 @@ import { getAllNotes } from '@/lib/redis';
 import SidebarNoteList from '@/components/SidebarNoteList';
 import EditButton from '@/components/EditButton';
 import NoteListSkeleton from './NoteListSkeleton';
+import SidebarSearchField from './SidebarSearchField';
 
 export default async function Sidebar() {
   const notes = await getAllNotes();
@@ -25,6 +26,7 @@ export default async function Sidebar() {
           </section>
         </Link>
         <section className='sidebar-menu' role='menubar'>
+          <SidebarSearchField />
           <EditButton noteId={null}>New</EditButton>
         </section>
         <Suspense fallback={<NoteListSkeleton />}>

@@ -17,7 +17,7 @@ export default function NoteEditor({
   initialTitle,
   initialBody,
 }: {
-  noteId: string | undefined;
+  noteId?: string;
   initialTitle: string;
   initialBody: string;
 }) {
