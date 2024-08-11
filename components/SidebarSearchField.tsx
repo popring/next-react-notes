@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslation } from '@/app/i18n/client';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useTransition } from 'react';
 
@@ -13,11 +14,12 @@ function Spinner({ active = true }) {
   );
 }
 
-export default function SidebarSearchField() {
+export default function SidebarSearchField({lng}: {lng: string}) {
   const { replace } = useRouter();
   const searchParams = useSearchParams()
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
+  const { t } = useTranslation(lng, 'basic')
 
   function handleSearch(term: string) {
     const params = new URLSearchParams(searchParams.toString());
@@ -44,7 +46,7 @@ export default function SidebarSearchField() {
       <input
         defaultValue={getSearchTerm()}
         id='sidebar-search-input'
-        placeholder='Search'
+        placeholder={t('search')}
         type='text'
         onChange={(e) => handleSearch(e.target.value)}
       />
