@@ -1,7 +1,7 @@
 'use client';
 
 import SidebarNoteItemContent from '@/components/SidebarNoteItemContent';
-import { Note } from '@/lib/redis';
+import { Note } from '@/lib/db';
 import { useSearchParams } from 'next/navigation';
 
 export default function SidebarNoteListFilter({

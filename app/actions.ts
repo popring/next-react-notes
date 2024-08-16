@@ -1,5 +1,5 @@
 'use server';
-import { updateNote, addNote, delNote, Note } from '@/lib/redis';
+import { updateNote, addNote, delNote, Note } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 import { stat, mkdir, writeFile } from 'fs/promises';
@@ -33,7 +33,7 @@ export async function saveNote(prevState: SaveNoteResult, formData: FormData) {
   if (!validated.success) {
     return {
       msg: 'Validation Error',
-      errors: validated.error.issues.map(item => item.message).join(','),
+      errors: validated.error.issues.map((item) => item.message).join(','),
     };
   }
   if (noteId) {
@@ -89,16 +89,16 @@ export async function importNote(formData: FormData) {
     // 写入文件
     const uniqueSuffix = `${Math.random().toString(36).slice(-6)}`;
     const filename = file.name.replace(/\.[^/.]+$/, '');
-    const uniqueFilename = `${filename}-${uniqueSuffix}.${file.name.split('.').pop()}`;
+    const uniqueFilename = `${filename}-${uniqueSuffix}.${file.name
+      .split('.')
+      .pop()}`;
     await writeFile(`${uploadDir}/${uniqueFilename}`, buffer);
 
     // 调用接口，写入数据库
-    const res = await addNote(
-      JSON.stringify({
-        title: filename,
-        content: buffer.toString('utf-8'),
-      })
-    );
+    const res = await addNote({
+      title: filename,
+      content: buffer.toString('utf-8'),
+    });
 
     // 清除缓存
     revalidatePath('/', 'layout');

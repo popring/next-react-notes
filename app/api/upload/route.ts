@@ -3,7 +3,7 @@ import { join } from 'path';
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import dayjs from 'dayjs';
-import { addNote } from '@/lib/redis';
+import { addNote } from '@/lib/db';
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData();

@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import NotePreview from '@/components/NotePreview';
 import EditButton from '@/components/EditButton';
-import { Note as NoteType } from '@/lib/redis';
+import { Note as NoteType } from '@/lib/db';
 
 export default function Note({ noteId, note }: { noteId: string; note: NoteType }) {
   const { title, content, updateTime } = note;
