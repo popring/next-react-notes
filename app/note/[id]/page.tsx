@@ -20,5 +20,6 @@ export default async function Page({ params }: { params: { id: string } }) {
     );
   }
 
+  // @ts-ignore
   return <Note noteId={noteId} note={note} />;
 }

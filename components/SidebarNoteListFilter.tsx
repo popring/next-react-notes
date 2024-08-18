@@ -3,8 +3,9 @@
 import SidebarNoteItemContent from '@/components/SidebarNoteItemContent';
 import { Note } from '@/lib/db';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
-export default function SidebarNoteListFilter({
+export function SidebarNoteListFilter({
   notes,
 }: {
   notes: { noteId: string; note: Note; header: JSX.Element }[];
@@ -40,5 +41,17 @@ export default function SidebarNoteListFilter({
         return null;
       })}
     </ul>
+  );
+}
+
+export default function SidebarNoteListFilterWrap({
+  notes,
+}: {
+  notes: { noteId: string; note: Note; header: JSX.Element }[];
+}) {
+  return (
+    <Suspense fallback={null}>
+      <SidebarNoteListFilter notes={notes} />
+    </Suspense>
   );
 }

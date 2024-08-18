@@ -10,6 +10,7 @@ export default async function ClientPage() {
       image: session.user.image || '',
       email: session.user.email,
       name: session.user.name,
+      userId: session.user.userId,
     };
   }
   return (

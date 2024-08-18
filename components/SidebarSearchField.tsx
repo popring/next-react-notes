@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useTransition } from 'react';
+import { Suspense, useTransition } from 'react';
 
 function Spinner({ active = true }) {
   return (
@@ -13,9 +13,9 @@ function Spinner({ active = true }) {
   );
 }
 
-export default function SidebarSearchField() {
+export function SidebarSearchField() {
   const { replace } = useRouter();
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
 
@@ -50,5 +50,13 @@ export default function SidebarSearchField() {
       />
       <Spinner active={isPending} />
     </div>
+  );
+}
+
+export default function SidebarSearchFieldWrap() {
+  return (
+    <Suspense fallback={null}>
+      <SidebarSearchField />
+    </Suspense>
   );
 }
