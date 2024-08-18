@@ -1,6 +1,7 @@
 import Image from 'next/image';
-import { signIn, auth, signOut } from 'auth';
+import { auth, signOut } from 'auth';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 function SignIn({
   provider,
@@ -13,7 +14,10 @@ function SignIn({
     <form
       action={async () => {
         'use server';
-        await signIn(provider);
+        // await signIn();
+        redirect(
+          `/auth/signin?callbackUrl=/`
+        );
       }}
     >
       <button {...props}>Sign In</button>
